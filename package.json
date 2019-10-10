@@ -2,24 +2,13 @@
   "name": "medwing-frontend",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@types/jest": "24.0.18",
-    "@types/node": "12.7.11",
-    "@types/react": "16.9.5",
-    "@types/react-dom": "16.9.1",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2",
-    "react-scripts": "3.2.0",
-    "typescript": "3.6.3"
-  },
   "scripts": {
+    "pug:b": "pug public",
+    "pug:w": "pug public -P -w",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
@@ -32,5 +21,46 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "dependencies": {
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-redux": "^7.1.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "3.2.0",
+    "redux": "^4.0.4",
+    "redux-logger": "^3.0.6",
+    "redux-observable": "^1.2.0",
+    "rxjs": "^6.5.3",
+    "styled-components": "^4.4.0",
+    "lodash-es": "^4.17.15",
+    "typescript": "3.6.3"
+  },
+  "devDependencies": {
+    "@types/enzyme": "^3.10.3",
+    "@types/facebook-js-sdk": "^3.3.0",
+    "@types/gapi": "^0.0.39",
+    "@types/gapi.auth2": "^0.0.50",
+    "@types/googlemaps": "^3.37.7",
+    "@types/jest": "^24.0.18",
+    "@types/lodash-es": "^4.17.3",
+    "@types/node": "^12.7.11",
+    "@types/react": "^16.9.5",
+    "@types/react-dom": "^16.9.1",
+    "@types/react-redux": "^7.1.4",
+    "@types/react-router-dom": "^5.1.0",
+    "@types/redux-logger": "^3.0.7",
+    "@types/styled-components": "^4.1.19",
+    "concurrently": "^5.0.0",
+    "enzyme": "^3.10.0",
+    "node-sass": "^4.12.0",
+    "pug-cli": "^1.0.0-alpha6",
+    "redux-devtools-extension": "^2.13.8",
+    "rxjs-tslint-rules": "^4.25.0",
+    "tslint-react": "^4.1.0",
+    "typescript": "^3.6.3"
   }
 }
