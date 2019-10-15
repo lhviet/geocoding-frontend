@@ -1,10 +1,16 @@
 export interface MapState {
+  locale?: GeocodingLocale;
+  locations: Array<Marker>;
+  isProcessing: boolean;
 }
 
 export interface MarkerState {
   markers: Array<Marker>;
-  isGettingMarkers: boolean;
-  isDeletingMarkers: boolean;
+  processingMarkerId: number;
+  getMarkersStatus: APIStatus;
+  deleteMarkerStatus: APIStatus;
+  saveMarkerStatus: APIStatus;
+  updateMarkerStatus: APIStatus;
 }
 
 export interface StoreState {
@@ -18,6 +24,18 @@ export interface Marker {
   lng: number;
   lat: number;
   desc: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at?: Date;
+  updated_at?: Date;
+}
+
+export type Point = [number, number];
+
+export enum GeocodingLocale {
+  DE = 'DE',
+}
+export enum APIStatus {
+  IDLE = 'IDLE',
+  PROCESSING = 'PROCESSING',
+  DONE = 'DONE',
+  FAILED = 'FAILED',
 }

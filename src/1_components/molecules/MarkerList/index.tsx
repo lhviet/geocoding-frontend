@@ -1,17 +1,39 @@
-import React, { Component } from 'react';
+import React, { Component, ReactNode } from 'react';
 import styled from 'styled-components';
 
-import MarkerListItem from '../../atoms/MarkerListItem';
-import { Marker } from '../../../types';
+import * as T from '../../../types';
+
+import MarkerListItem from '../MarkerListItem';
+import Button from '../../atoms/Button';
 
 const Root = styled.ul`
   padding: 0;
+  padding: 0.2rem 0;
   list-style: none;
+`;
+const ButtonWrapper = styled.div`
+  text-align: right;
+`;
+const ClearBtn = styled(Button)`
+  position: relative;
+  right: 0;
+  margin-bottom: 0.2rem;
 `;
 
 export interface Props {
-  markers: Array<Marker>;
-  deleteMarker(id: number): void;
+  markers: Array<T.Marker>;
+
+  // Geocoding feature
+  saveMarker?(marker: T.Marker): void;
+  clearLocations?(): void;
+
+  // Markers feature
+  processingMarkerId?: number,
+  deleteMarkerStatus?: T.APIStatus,
+  updateMarkerStatus?: T.APIStatus,
+  updateMarker?(marker: T.Marker): void;
+  deleteMarker?(id: number): void;
+
   className?: string;
 }
 
@@ -27,17 +49,41 @@ class MarkerList extends Component<Props, State> {
   }
 
   render() {
-    const { markers, deleteMarker, className }: Props = this.props;
+    const {
+      markers, processingMarkerId, deleteMarkerStatus, updateMarkerStatus,
+      saveMarker, clearLocations, updateMarker, deleteMarker, className,
+    }: Props = this.props;
 
-    const markerItems: React.ReactNode = markers
-      .map((m, index) => <MarkerListItem
-        key={`m_${index}`}
-        marker={m}
-        onDelete={deleteMarker}
-      />);
+    const clearBtn: ReactNode = clearLocations !== undefined && markers.length > 0 ? (
+      <ButtonWrapper>
+        <ClearBtn onClick={clearLocations}>Clear All</ClearBtn>
+      </ButtonWrapper>
+    ) : undefined;
+
+    const markerItems: ReactNode = markers
+      .map((m, index) => {
+        const isProcessing: boolean =
+          processingMarkerId !== undefined && processingMarkerId === m.id &&
+          (
+            (deleteMarkerStatus !== undefined && deleteMarkerStatus === T.APIStatus.PROCESSING) ||
+            (deleteMarkerStatus !== undefined && updateMarkerStatus === T.APIStatus.PROCESSING)
+          );
+
+        return (
+          <MarkerListItem
+            key={`m_${index}`}
+            marker={m}
+            isProcessing={isProcessing}
+            onSave={saveMarker}
+            onUpdate={updateMarker}
+            onDelete={deleteMarker}
+          />
+        );
+      });
 
     return (
       <Root className={className}>
+        {clearBtn}
         {markerItems}
       </Root>
     );

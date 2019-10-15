@@ -53,7 +53,6 @@ class App extends Component<Props, State> {
 
     // Asynchronously checking if Google Map JavaScript API loaded successfully
     const googleMapLoadTimer = setInterval(() => {
-      console.log('google.maps = ', google.maps);
       if (google.maps) {
         this.setState({ isGoogleMapReady: true });
         clearInterval(googleMapLoadTimer);
@@ -87,8 +86,6 @@ const mapStateToProps = ({ marker }: T.StoreState) => {
 };
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
   getMarkers() {
-    console.log('getMarkers');
-
     dispatch(getMarkers());
   },
 });

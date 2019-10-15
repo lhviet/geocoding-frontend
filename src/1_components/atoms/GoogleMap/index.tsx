@@ -1,5 +1,6 @@
-import React, { Component, RefObject } from 'react';
+import React, { Component, memo, RefObject } from 'react';
 import styled, { AnyStyledComponent } from 'styled-components';
+import * as _ from 'lodash-es';
 
 import * as T from 'types';
 
@@ -13,6 +14,18 @@ function initMap(elem: HTMLElement, markers?: Array<T.Marker>): google.maps.Map 
   const berlin = { lat: 52.5074434, lng: 13.3903913 };
   // The map, centered at Berlin
   return new google.maps.Map(elem, {zoom: 8, center: berlin});
+}
+
+const markerToPoint: (marker: T.Marker) => T.Point = (m) => [m.lat, m.lng];
+function arePropsEqual(prevProps: Props, props: Props): boolean {
+  if (props.isGoogleMapReady && !prevProps.isGoogleMapReady) {
+    return false;
+  }
+
+  const prevHash: string = _.join(_.flatten(prevProps.markers.map(markerToPoint)));
+  const hash: string = _.join(_.flatten(props.markers.map(markerToPoint)));
+
+  return prevHash === hash;
 }
 
 interface Props {
@@ -43,8 +56,11 @@ class GoogleMap extends Component<Props> {
     if (this.map) {
       // Clear all Markers
       this.mapMarkers.forEach((m) => m.setMap(null));
+
       // Set new Markers
-      this.mapMarkers = this.props.markers.map((m) => ({ lat: m.lat, lng: m.lng }))
+      this.mapMarkers = this.props.markers
+        .map(markerToPoint)
+        .map(([lat, lng]) => ({ lat, lng }))
         .map((m) => new google.maps.Marker({ position: m, map: this.map }));
     }
   }
@@ -56,4 +72,4 @@ class GoogleMap extends Component<Props> {
   }
 }
 
-export default GoogleMap;
+export default memo(GoogleMap, arePropsEqual);

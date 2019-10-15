@@ -7,7 +7,8 @@ const Root = styled.button`
   ${styles.primaryOutlineBtn};
   
   font-size: .8rem;
-  min-width: 5rem;
+  line-height: 1.1;
+  min-width: 4.2rem;
 `;
 
 export default React.memo(Root);

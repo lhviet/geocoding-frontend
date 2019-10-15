@@ -10,6 +10,7 @@ export const colors = {
 
   borderGray: new Color('rgb(179, 179, 179)'),
 
+  white: new Color('rgb(255, 255, 255)'),
   grey: new Color('rgb(97, 97, 97)'),
   dark: new Color('rgb(57,57,57)'),
   red: new Color('#dc3545'),

@@ -8,6 +8,7 @@ import logo from '../../../logo.svg';
 import SearchInputField from '../../molecules/SearchInputField';
 
 import MarkerList from '../../../2_containers/molecules/MarkerList';
+import GeocodingLocationList from '../../../2_containers/molecules/GeocodingLocationList';
 
 const Root = styled.div`
   ${styles.scrollbar};
@@ -22,8 +23,8 @@ const Root = styled.div`
   border-right: solid 1px ${colors.borderGray.toString()};
 `;
 
-interface Props {
-  isSearching?: boolean;
+export interface Props {
+  isSearching: boolean;
   className?: string;
   search(value: string): void;
 }
@@ -32,19 +33,9 @@ class LeftSideBar extends Component<Props> {
   render() {
     return (
       <Root>
-        <SearchInputField search={this.props.search} />
+        <SearchInputField search={this.props.search} isSearching={this.props.isSearching}/>
+        <GeocodingLocationList />
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
         <h2>Your Markers</h2>
         <MarkerList />
       </Root>

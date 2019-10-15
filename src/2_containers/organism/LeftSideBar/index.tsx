@@ -1,22 +1,26 @@
 import { Action, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
-import { StoreState } from '../../../types';
+import { GeocodingLocale, StoreState } from '../../../types';
 
-import LeftSideBar from '../../../1_components/organisms/LeftSideBar';
+import LeftSideBar, { Props } from '../../../1_components/organisms/LeftSideBar';
 
-import { actionGeoCoding } from '../../../3_store/ducks/map';
+import { geocoding } from '../../../3_store/ducks/map';
 
+type StatePropKeys = 'isSearching';
+type DispatchPropKeys = 'search';
+export type StateProps = Pick<Props, StatePropKeys>;
+export type DispatchProps = Pick<Props, DispatchPropKeys>;
 
-const mapStateToProps = ({ marker }: StoreState) => {
+const mapStateToProps: (state: Pick<StoreState, 'map'>) => StateProps = ({ map }) => {
   return {
-    markers: marker.markers,
+    isSearching: map.isProcessing,
   };
 };
-const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({
-  search(keywords: string) {
-    console.log('search = ', keywords);
-    dispatch(actionGeoCoding(keywords));
+const mapDispatchToProps: (dispatch: Dispatch<Action>) => DispatchProps = (dispatch: Dispatch<Action>) => ({
+  search(keywords: string, locale?: GeocodingLocale) {
+    console.log('search = ', keywords, locale);
+    dispatch(geocoding(keywords, locale));
   },
 });
 

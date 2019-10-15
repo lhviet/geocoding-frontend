@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 
 import { alpha, colors } from '../../../5_constants/theme';
@@ -51,44 +51,27 @@ interface Props {
   search(value: string): void;
 }
 
-interface State {
-  value: string;
-}
+const SearchInputField: FC<Props> = ({ isSearching, value, search, className }: Props) => {
+  const [keyword, setKeyword] = useState(value || '');
 
-class SearchInputField extends React.Component<Props, State> {
-  constructor(props: Props, context: any) {
-    super(props, context);
-    this.state = {
-      value: this.props.value || '',
-    };
-  }
+  const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => setKeyword(e.currentTarget.value);
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && search(keyword);
+  const handleSearch = () => search(keyword);
 
-  handleInputChange = (e: React.FormEvent<HTMLInputElement>) => {
-    this.setState({value: e.currentTarget.value});
-  }
-
-  handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      this.handleSearch();
-    }
-  }
-
-  handleSearch = () => this.props.search(this.state.value);
-
-  render() {
-    const { isSearching, className }: Props = this.props;
-
-    return (
-      <Root className={className}>
-        <SearchInput
-          value={this.state.value}
-          onChange={this.handleInputChange}
-          onKeyDown={this.handleInputKeyDown}
-        />
-        <SearchIcon iconType={IconType.search} isLoading={isSearching} onClick={this.handleSearch} />
-      </Root>
-    );
-  }
+  return (
+    <Root className={className}>
+      <SearchInput
+        value={keyword}
+        onChange={handleInputChange}
+        onKeyDown={handleInputKeyDown}
+      />
+      <SearchIcon
+        iconType={IconType.search}
+        isLoading={isSearching}
+        onClick={handleSearch}
+      />
+    </Root>
+  );
 }
 
 export default SearchInputField;

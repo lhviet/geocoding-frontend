@@ -25,12 +25,25 @@ const getFormattedDate: (date: Date) => string = (date) => dateformat(date, DATE
 interface Props {
   lat: number;
   lng: number;
-  updated: Date;
-  created: Date;
+  updated?: Date;
+  created?: Date;
   className?: string;
 }
 
 const MarkerInfo: FC<Props> = ({ lat, lng, updated, created, className }: Props) => {
+  const updatedInfo: React.ReactNode = updated ? (
+    <Row>
+      <ColTitle>Updated</ColTitle>
+      <ColValue>{getFormattedDate(updated)}</ColValue>
+    </Row>
+  ) : undefined;
+  const createdInfo: React.ReactNode = created ? (
+    <Row>
+      <ColTitle>Created</ColTitle>
+      <ColValue>{getFormattedDate(created)}</ColValue>
+    </Row>
+  ) : undefined;
+
   return (
     <Root className={className} >
       <Body>
@@ -42,14 +55,8 @@ const MarkerInfo: FC<Props> = ({ lat, lng, updated, created, className }: Props)
           <ColTitle>Longitude</ColTitle>
           <ColValue>{lng}</ColValue>
         </Row>
-        <Row>
-          <ColTitle>Updated</ColTitle>
-          <ColValue>{getFormattedDate(updated)}</ColValue>
-        </Row>
-        <Row>
-          <ColTitle>Created</ColTitle>
-          <ColValue>{getFormattedDate(created)}</ColValue>
-        </Row>
+        {updatedInfo}
+        {createdInfo}
       </Body>
     </Root>
   );
