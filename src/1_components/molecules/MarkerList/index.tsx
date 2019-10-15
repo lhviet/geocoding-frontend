@@ -7,7 +7,6 @@ import MarkerListItem from '../MarkerListItem';
 import Button from '../../atoms/Button';
 
 const Root = styled.ul`
-  padding: 0;
   padding: 0.2rem 0;
   list-style: none;
 `;
@@ -37,17 +36,7 @@ export interface Props {
   className?: string;
 }
 
-export interface State {
-}
-
-class MarkerList extends Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-
-    this.state = {
-    };
-  }
-
+class MarkerList extends Component<Props> {
   render() {
     const {
       markers, processingMarkerId, deleteMarkerStatus, updateMarkerStatus,
@@ -66,7 +55,7 @@ class MarkerList extends Component<Props, State> {
           processingMarkerId !== undefined && processingMarkerId === m.id &&
           (
             (deleteMarkerStatus !== undefined && deleteMarkerStatus === T.APIStatus.PROCESSING) ||
-            (deleteMarkerStatus !== undefined && updateMarkerStatus === T.APIStatus.PROCESSING)
+            (updateMarkerStatus !== undefined && updateMarkerStatus === T.APIStatus.PROCESSING)
           );
 
         return (

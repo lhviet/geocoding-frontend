@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, memo, useState } from 'react';
 import styled from 'styled-components';
 
 import { alpha, colors } from '../../../5_constants/theme';
@@ -44,6 +44,11 @@ const SearchIcon = styled(IconWithSpinner)`
   }
 `;
 
+function arePropsEqual(prevProps: Props, props: Props): boolean {
+  return prevProps.isSearching === props.isSearching &&
+    prevProps.value === props.value;
+}
+
 interface Props {
   isSearching?: boolean;
   value?: string;
@@ -72,6 +77,6 @@ const SearchInputField: FC<Props> = ({ isSearching, value, search, className }: 
       />
     </Root>
   );
-}
+};
 
-export default SearchInputField;
+export default memo(SearchInputField, arePropsEqual);

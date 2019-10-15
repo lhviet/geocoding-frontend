@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
+import React, {Component, FC, memo} from 'react';
 import styled from 'styled-components';
 
 import { colors, styles } from '../../../5_constants/theme';
-
-import logo from '../../../logo.svg';
 
 import SearchInputField from '../../molecules/SearchInputField';
 
@@ -23,24 +21,25 @@ const Root = styled.div`
   border-right: solid 1px ${colors.borderGray.toString()};
 `;
 
+function arePropsEqual(prevProps: Props, props: Props): boolean {
+  return prevProps.isSearching === props.isSearching;
+}
+
 export interface Props {
   isSearching: boolean;
   className?: string;
   search(value: string): void;
 }
 
-class LeftSideBar extends Component<Props> {
-  render() {
-    return (
-      <Root>
-        <SearchInputField search={this.props.search} isSearching={this.props.isSearching}/>
-        <GeocodingLocationList />
-        <img src={logo} className="App-logo" alt="logo" />
-        <h2>Your Markers</h2>
-        <MarkerList />
-      </Root>
-    );
-  }
+const LeftSideBar: FC<Props> = ({ isSearching, search, className }: Props) => {
+  return (
+    <Root className={className}>
+      <SearchInputField search={search} isSearching={isSearching}/>
+      <GeocodingLocationList />
+      <h2>Your Markers</h2>
+      <MarkerList />
+    </Root>
+  );
 }
 
-export default LeftSideBar;
+export default memo(LeftSideBar, arePropsEqual);

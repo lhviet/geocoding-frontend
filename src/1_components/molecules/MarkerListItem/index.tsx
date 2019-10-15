@@ -1,4 +1,4 @@
-import React, { FC, memo, ReactNode, useEffect, useState } from 'react';
+import React, { FC, ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Marker } from '../../../types';
@@ -151,4 +151,4 @@ const MarkerListItem: FC<Props> = ({ marker, isProcessing, onSave, onUpdate, onD
   );
 };
 
-export default memo(MarkerListItem);
+export default MarkerListItem;
