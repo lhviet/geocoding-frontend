@@ -1,6 +1,6 @@
 import { combineEpics } from 'redux-observable';
-import { epics as wordEpics } from '../ducks/word';
+import { epics as markerEpics } from '../ducks/marker';
 
 export const rootEpic = combineEpics(
-  wordEpics,
+  markerEpics,
 );

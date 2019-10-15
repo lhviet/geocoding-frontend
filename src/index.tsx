@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import {createEpicMiddleware} from 'redux-observable';
+import { createEpicMiddleware } from 'redux-observable';
 
 import * as serviceWorker from './serviceWorker';
 
@@ -33,7 +34,9 @@ epicMiddleware.run(rootEpic);
 
 ReactDOM.hydrate((
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <Route exact={true} path="/" component={App}/>
+    </BrowserRouter>
   </Provider>
 ), document.getElementById('root'));
 

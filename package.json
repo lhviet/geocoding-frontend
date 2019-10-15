@@ -26,6 +26,9 @@
     "extends": "react-app"
   },
   "dependencies": {
+    "color": "^3.1.2",
+    "dateformat": "^3.0.3",
+    "lodash-es": "^4.17.15",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-redux": "^7.1.1",
@@ -35,11 +38,11 @@
     "redux-logger": "^3.0.6",
     "redux-observable": "^1.2.0",
     "rxjs": "^6.5.3",
-    "styled-components": "^4.4.0",
-    "lodash-es": "^4.17.15",
-    "typescript": "3.6.3"
+    "styled-components": "^4.4.0"
   },
   "devDependencies": {
+    "@types/color": "^3.0.0",
+    "@types/dateformat": "^3.0.1",
     "@types/enzyme": "^3.10.3",
     "@types/facebook-js-sdk": "^3.3.0",
     "@types/gapi": "^0.0.39",
@@ -60,7 +63,10 @@
     "pug-cli": "^1.0.0-alpha6",
     "redux-devtools-extension": "^2.13.8",
     "rxjs-tslint-rules": "^4.25.0",
+    "tslint-microsoft-contrib": "^6.2.0",
+    "tslint-eslint-rules": "^5.4.0",
     "tslint-react": "^4.1.0",
-    "typescript": "^3.6.3"
+    "tslint": "^5.20.0",
+    "typescript": "beta"
   }
 }

@@ -1,9 +1,11 @@
 import { combineReducers, AnyAction } from 'redux';
 
-import {StoreState} from '^/types';
+import { StoreState } from '../../types';
 
-import wordReducer from './word';
+import mapReducer from './map';
+import markerReducer from './marker';
 
 export default combineReducers<StoreState, AnyAction>({
-  word: wordReducer,
+  map: mapReducer,
+  marker: markerReducer,
 });

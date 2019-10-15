@@ -1,0 +1,30 @@
+# We need to import these rules separately from common config
+# since they are resolved based on the directory of config file
+# who have the `rulesDirectory` option.
+rulesDirectory:
+  - tslint-react/rules
+  - tslint-microsoft-contrib
+  - node_modules/tslint-eslint-rules/dist/rules
+
+rules:
+  no-submodule-imports:
+    severity: default
+    options:
+      - "^"
+      - rxjs
+      - ol
+  whitespace:
+    severity: default
+    options:
+      - check-branch
+      - check-decl
+      - check-operator
+      - check-module
+      - check-separator
+      - check-rest-spread
+      - check-type
+      - check-typecast
+      - check-type-operator
+      - check-preblock
+
+defaultSeverity: warning
