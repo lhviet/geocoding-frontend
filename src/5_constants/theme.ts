@@ -1,5 +1,5 @@
 // tslint:disable
-import * as _ from 'lodash-es';
+import _ from 'lodash-es';
 import Color from 'color';
 import { css } from 'styled-components';
 

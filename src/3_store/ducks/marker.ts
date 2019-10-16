@@ -2,7 +2,7 @@ import { AnyAction, Reducer } from 'redux';
 import { ActionsObservable, combineEpics, ofType } from 'redux-observable';
 import { catchError, map, mapTo, mergeMap, switchMap } from 'rxjs/operators';
 import { ajax, AjaxError } from 'rxjs/ajax';
-import * as _ from 'lodash-es';
+import _ from 'lodash-es';
 
 import * as T from '../../types';
 import { APIStatus } from '../../types';

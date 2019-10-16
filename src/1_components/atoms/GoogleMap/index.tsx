@@ -1,6 +1,6 @@
 import React, { Component, memo, RefObject } from 'react';
 import styled, { AnyStyledComponent } from 'styled-components';
-import * as _ from 'lodash-es';
+import _ from 'lodash-es';
 
 import * as T from 'types';
 

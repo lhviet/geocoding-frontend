@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { Action, Dispatch } from 'redux';
+import { Dispatch } from 'redux';
 
 import * as T from '../../../types';
 
@@ -12,7 +12,7 @@ type DispatchPropKeys = 'deleteMarker' | 'updateMarker';
 export type StateProps = Pick<Props, StatePropKeys>;
 export type DispatchProps = Pick<Props, DispatchPropKeys>;
 
-const mapStateToProps: (state: Pick<T.StoreState, 'marker'>) => StateProps = ({ marker }) => {
+export const mapStateToProps: (state: Pick<T.StoreState, 'marker'>) => StateProps = ({ marker }) => {
   return {
     markers: marker.markers,
     processingMarkerId: marker.processingMarkerId,
@@ -21,7 +21,7 @@ const mapStateToProps: (state: Pick<T.StoreState, 'marker'>) => StateProps = ({ 
   };
 };
 
-const mapDispatchToProps: (dispatch: Dispatch<Action>) => DispatchProps = (dispatch) => ({
+export const mapDispatchToProps: (dispatch: Dispatch) => DispatchProps = (dispatch) => ({
   deleteMarker(id: number): void {
     dispatch(deleteMarker(id));
   },
