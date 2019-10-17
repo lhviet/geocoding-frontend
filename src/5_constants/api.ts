@@ -2,7 +2,10 @@
  * @info Backend API Swagger
  */
 export const HOST = {
-  base: 'localhost:3001',
+  base:
+    process.env.NODE_ENV === 'development' ?
+      'localhost:3001' :
+      'ec2-15-164-215-34.ap-northeast-2.compute.amazonaws.com:3000',
   protocol: 'http',
   apiModule: 'api',
   version: 'v1',

@@ -27,7 +27,7 @@ const epicGeoCoding = (action$: ActionsObservable<AnyAction>) => action$.pipe(
   ofType(`${GEO_CODING}_START`),
   switchMap(({ data }) => {
     const locale: string = data.locale ? `&l=${data.locale}` : '';
-    const url: string = getAPIUrl(HOST.api.geocoding_query, `?q=${data.keywords}`, locale);
+    const url: string = `${getAPIUrl(HOST.api.geocoding_query)}?q=${data.keywords}${locale}`;
     return ajax.get(url, headerJson)
       .pipe(
         map(({response}) => response.map(APIToMarker)),
