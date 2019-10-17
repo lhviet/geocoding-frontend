@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { alpha, colors } from '../../../5_constants/theme';
 
 import IconWithSpinner, { IconType } from '../../atoms/IconWithSpinner';
+import ButtonToggle from '../../atoms/ButtonToggle';
 
 const Root = styled.div`
   position: relative;
@@ -43,6 +44,12 @@ const SearchIcon = styled(IconWithSpinner)`
     color: ${colors.blueDark.alpha(alpha.alpha8).toString()};
   }
 `;
+const ButtonToggleWrapper = styled.div`
+  text-align: right;
+  margin-top: 3px;
+`;
+
+const LOCALE_DE = 'DE';
 
 function arePropsEqual(prevProps: Props, props: Props): boolean {
   return prevProps.isSearching === props.isSearching &&
@@ -53,15 +60,17 @@ interface Props {
   isSearching?: boolean;
   value?: string;
   className?: string;
-  search(value: string): void;
+  search(value: string, locale?: string): void;
 }
 
 const SearchInputField: FC<Props> = ({ isSearching, value, search, className }: Props) => {
   const [keyword, setKeyword] = useState(value || '');
+  const [isLocaleToggled, setLocaleToggled] = useState(true);
 
   const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => setKeyword(e.currentTarget.value);
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && search(keyword);
-  const handleSearch = () => search(keyword);
+  const handleSearch = () => search(keyword, isLocaleToggled ? LOCALE_DE : undefined);
+  const handleToggle = () => setLocaleToggled(!isLocaleToggled);
 
   return (
     <Root className={className}>
@@ -75,6 +84,11 @@ const SearchInputField: FC<Props> = ({ isSearching, value, search, className }: 
         isLoading={isSearching}
         onClick={handleSearch}
       />
+      <ButtonToggleWrapper>
+        <ButtonToggle isToggled={isLocaleToggled} onClick={handleToggle}>
+          Germany
+        </ButtonToggle>
+      </ButtonToggleWrapper>
     </Root>
   );
 };

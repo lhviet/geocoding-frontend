@@ -28,7 +28,7 @@ function arePropsEqual(prevProps: Props, props: Props): boolean {
 export interface Props {
   isSearching: boolean;
   className?: string;
-  search(value: string): void;
+  search(value: string, locale?: string): void;
 }
 
 const LeftSideBar: FC<Props> = ({ isSearching, search, className }: Props) => {
@@ -40,6 +40,6 @@ const LeftSideBar: FC<Props> = ({ isSearching, search, className }: Props) => {
       <MarkerList />
     </Root>
   );
-}
+};
 
 export default memo(LeftSideBar, arePropsEqual);

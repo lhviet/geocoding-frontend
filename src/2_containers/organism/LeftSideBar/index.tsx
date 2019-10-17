@@ -19,7 +19,6 @@ const mapStateToProps: (state: Pick<StoreState, 'map'>) => StateProps = ({ map }
 };
 const mapDispatchToProps: (dispatch: Dispatch<Action>) => DispatchProps = (dispatch: Dispatch<Action>) => ({
   search(keywords: string, locale?: GeocodingLocale) {
-    console.log('search = ', keywords, locale);
     dispatch(geocoding(keywords, locale));
   },
 });
