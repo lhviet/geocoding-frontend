@@ -21,6 +21,7 @@ const ClearBtn = styled(Button)`
 
 export interface Props {
   markers: Array<T.Marker>;
+  locateMarker(marker: T.Marker): void;
 
   // Geocoding feature
   saveMarker?(marker: T.Marker): void;
@@ -40,7 +41,7 @@ class MarkerList extends Component<Props> {
   render() {
     const {
       markers, processingMarkerId, deleteMarkerStatus, updateMarkerStatus,
-      saveMarker, clearLocations, updateMarker, deleteMarker, className,
+      locateMarker, saveMarker, clearLocations, updateMarker, deleteMarker, className,
     }: Props = this.props;
 
     const clearBtn: ReactNode = clearLocations !== undefined && markers.length > 0 ? (
@@ -63,6 +64,7 @@ class MarkerList extends Component<Props> {
             key={`m_${index}`}
             marker={m}
             isProcessing={isProcessing}
+            onLocate={locateMarker}
             onSave={saveMarker}
             onUpdate={updateMarker}
             onDelete={deleteMarker}

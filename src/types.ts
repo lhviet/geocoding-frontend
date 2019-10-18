@@ -1,5 +1,6 @@
 export interface MapState {
   locale?: GeocodingLocale;
+  center?: Marker;
   locations: Array<Marker>;
   isProcessing: boolean;
 }

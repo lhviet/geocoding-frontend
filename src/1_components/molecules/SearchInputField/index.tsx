@@ -67,10 +67,10 @@ const SearchInputField: FC<Props> = ({ isSearching, value, search, className }: 
   const [keyword, setKeyword] = useState(value || '');
   const [isLocaleToggled, setLocaleToggled] = useState(true);
 
-  const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => setKeyword(e.currentTarget.value);
-  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && search(keyword);
   const handleSearch = () => search(keyword, isLocaleToggled ? LOCALE_DE : undefined);
   const handleToggle = () => setLocaleToggled(!isLocaleToggled);
+  const handleInputChange = (e: React.FormEvent<HTMLInputElement>) => setKeyword(e.currentTarget.value);
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => e.key === 'Enter' && handleSearch();
 
   return (
     <Root className={className}>

@@ -36,6 +36,7 @@ const RightContainer: AnyStyledComponent = styled.div`
 
 interface Props {
   markers: Array<T.Marker>;
+  center?: T.Marker;
   getMarkers(): void;
 }
 
@@ -71,7 +72,11 @@ class App extends Component<Props, State> {
         <Body>
           <LeftSideBar />
           <RightContainer>
-            <GoogleMap isGoogleMapReady={this.state.isGoogleMapReady} markers={this.props.markers} />
+            <GoogleMap
+              isGoogleMapReady={this.state.isGoogleMapReady}
+              markers={this.props.markers}
+              center={this.props.center}
+            />
           </RightContainer>
         </Body>
       </Root>
@@ -79,9 +84,10 @@ class App extends Component<Props, State> {
   }
 }
 
-const mapStateToProps = ({ marker }: T.StoreState) => {
+const mapStateToProps = ({ marker, map }: T.StoreState) => {
   return {
     markers: marker.markers,
+    center: map.center,
   };
 };
 const mapDispatchToProps = (dispatch: Dispatch<Action>) => ({

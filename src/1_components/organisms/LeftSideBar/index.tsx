@@ -1,4 +1,4 @@
-import React, {Component, FC, memo} from 'react';
+import React, { FC, memo } from 'react';
 import styled from 'styled-components';
 
 import { colors, styles } from '../../../5_constants/theme';

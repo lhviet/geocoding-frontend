@@ -6,9 +6,10 @@ import * as T from '../../../types';
 import MarkerList, { Props } from '../../../1_components/molecules/MarkerList';
 
 import { deleteMarker, updateMarker } from '../../../3_store/ducks/marker';
+import { changeLocation } from '../../../3_store/ducks/map';
 
 type StatePropKeys = 'markers' | 'processingMarkerId' | 'deleteMarkerStatus' | 'updateMarkerStatus';
-type DispatchPropKeys = 'deleteMarker' | 'updateMarker';
+type DispatchPropKeys = 'locateMarker' | 'deleteMarker' | 'updateMarker';
 export type StateProps = Pick<Props, StatePropKeys>;
 export type DispatchProps = Pick<Props, DispatchPropKeys>;
 
@@ -22,6 +23,9 @@ export const mapStateToProps: (state: Pick<T.StoreState, 'marker'>) => StateProp
 };
 
 export const mapDispatchToProps: (dispatch: Dispatch) => DispatchProps = (dispatch) => ({
+  locateMarker(marker: T.Marker): void {
+    dispatch(changeLocation(marker));
+  },
   deleteMarker(id: number): void {
     dispatch(deleteMarker(id));
   },

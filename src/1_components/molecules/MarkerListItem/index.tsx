@@ -63,17 +63,21 @@ const SaveButton = styled(Button)`
 const UpdateButton = styled(SaveButton)`
   margin-right: .3rem;
 `;
+const LocateButton = styled(UpdateButton)`
+  border-color: ${colors.yellow.toString()};
+`;
 
 interface Props {
   marker: Marker;
   isProcessing: boolean;
   className?: string;
+  onLocate(marker: Marker): void;
   onSave?(marker: Marker): void;
   onUpdate?(marker: Marker): void;
   onDelete?(id: number): void;
 }
 
-const MarkerListItem: FC<Props> = ({ marker, isProcessing, onSave, onUpdate, onDelete, className }: Props) => {
+const MarkerListItem: FC<Props> = ({ marker, isProcessing, onLocate, onSave, onUpdate, onDelete, className }: Props) => {
   const [isEditing, setEditing] = useState(false);
   const toggleEdit = () => setEditing(!isEditing);
 
@@ -91,6 +95,7 @@ const MarkerListItem: FC<Props> = ({ marker, isProcessing, onSave, onUpdate, onD
     }
   }, [marker, isProcessing]);
 
+  const handleLocate: () => void = () => onLocate(marker);
   const handleSave: () => void = () => onSave && onSave(marker);
   const handleDelete: () => void = () => onDelete && onDelete(marker.id);
   const handleUpdate: () => void = () => {
@@ -144,6 +149,7 @@ const MarkerListItem: FC<Props> = ({ marker, isProcessing, onSave, onUpdate, onD
         />
       </MarkerWrapper>
       <ButtonWrapper>
+        <LocateButton onClick={handleLocate}>Locate</LocateButton>
         {buttons}
       </ButtonWrapper>
       <ProcessingOverlay isVisible={isProcessing} />

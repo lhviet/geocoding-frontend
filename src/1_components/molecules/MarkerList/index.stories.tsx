@@ -1,5 +1,6 @@
 import { storiesOf } from '@storybook/react';
 import React from 'react';
+import { action } from '@storybook/addon-actions';
 
 import * as T from '../../../types';
 
@@ -16,6 +17,9 @@ storiesOf('Molecules|MarkerList', module)
     });
 
     return (
-      <MarkerList markers={[marker(1), marker(2)]} />
+      <MarkerList
+        markers={[marker(1), marker(2)]}
+        locateMarker={action('Locate Marker')}
+      />
     );
   });

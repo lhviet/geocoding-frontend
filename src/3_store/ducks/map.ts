@@ -19,8 +19,14 @@ export const geocoding = (keywords: string, locale?: T.GeocodingLocale): AnyActi
   { keywords, locale },
 );
 
-export const CLEAR_LOCATIONS = 'MAP__CLEAR_LOCATION';
+export const CLEAR_LOCATIONS = 'MAP__CLEAR_LOCATIONS';
 export const clearLocations = (): AnyAction => ({ type: CLEAR_LOCATIONS });
+
+export const CHANGE_LOCATION = 'MAP__CHANGE_LOCATION';
+export const changeLocation = (center: T.Marker): AnyAction => ({
+  type: CHANGE_LOCATION,
+  center
+});
 
 // ----- EPICs --------------------------------------------------------------------------------------------------------
 const epicGeoCoding = (action$: ActionsObservable<AnyAction>) => action$.pipe(
@@ -71,6 +77,9 @@ const reducer: Reducer<T.MapState> = (state = initialState, action: AnyAction) =
 
     case CLEAR_LOCATIONS:
       return { ...state, locations: [] };
+
+    case CHANGE_LOCATION:
+      return { ...state, center: action.center };
 
     default:
       return state;
